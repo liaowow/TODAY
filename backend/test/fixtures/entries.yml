@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyString
+  mood: MyString
+  image: MyString
+  song: MyString
+
+two:
+  title: MyString
+  content: MyString
+  mood: MyString
+  image: MyString
+  song: MyString
