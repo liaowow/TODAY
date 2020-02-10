@@ -7,39 +7,46 @@
 
 /*** TESTING FETCH ***/
 const postFetch = function() {
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:3000/entries", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            username: "someone",
-            location: "somewhere",
-            first_name: "some",
-            profile_pic: "url"
+            title: "today I...",
+            content: "ars;ghuareig",
+            current_mood: "happy",
+            mood_id: 1,
+            image: "url",
+            song: "url",
+            quote_id: 20,
+            user_id: 2
         })
     })
 }
 
 const patchFetch = function() {
-    fetch("http://localhost:3000/users/6", {
+    fetch("http://localhost:3000/entries/131", {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            username: "this one",
-            location: "here",
-            first_name: "blah",
-            profile_pic: "urlurl"
+            title: "yesterday I...",
+            content: "oops I did that again...",
+            current_mood: "sad",
+            mood_id: 2,
+            image: "urlurl",
+            song: "urlurl",
+            quote_id: 19
         })
     })
 }
 
 const deleteFetch = function() {
-    fetch("http://localhost:3000/users/6", {
+    fetch("http://localhost:3000/entries/131", {
         method: "DELETE",
     })
 }
