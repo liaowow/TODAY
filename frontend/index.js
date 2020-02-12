@@ -2,10 +2,9 @@
 
 // const currentUser = [];
 let currentUser;
+let allMoods;
+let allQuotes;
 
-const allMoods = [];
-const allQuotes = [];
-const allUserEntries = [];
 
 let allUsers = [];
 
@@ -28,7 +27,7 @@ function handleSidebarClick(event) {
             renderEntryForm();
             break;
         case "entries":
-            console.log(event.target.id)
+            getAllEntriesForUser();
             break;
         case "moods":
             console.log(event.target.id)
@@ -165,14 +164,7 @@ function renderCreateAccount() {
     createUserForm.addEventListener("submit", handleCreateUserformSubmit);
 };
 
-// renders the form to create a new entry
-function renderEntryForm() {
-    currentUser = JSON.parse(localStorage.currentUser);
 
-    mainPageDiv.innerHTML = `
-    <h1>Create an Entry, ${currentUser.first_name}</h1>
-    `
-}
 
 // renders the currentUser's account information
 function renderAccountInfo() {
@@ -239,6 +231,9 @@ let update = function() {
 function checkLoggedInUser() {
     if (localStorage.currentUser === "") {
         renderLogIn();
+    } else if (localStorage.currentUser === undefined) {
+        localStorage.currentUser = ""
+        renderLogIn();
     } else {
         renderEntryForm();
     }
@@ -252,3 +247,5 @@ checkLoggedInUser();
 // adds time to sidebar
 update();
 setInterval(update, 1000);
+// get all moods
+getAllMoodsFetch();

@@ -71,11 +71,65 @@ function deleteUserAccountFetch() {
 };
 
     /***** ENTRY FETCHES *****/
+  // READ - gets all entries for logged-in user
+  function getAllEntriesForUser() {
+    currentUser = JSON.parse(localStorage.currentUser);
+    const currentUserID = currentUser.id;
+
+    fetch(`${baseURL}/users/${currentUserID}/entries`)
+    .then(r => r.json())
+    .then(userEntries => {
+        allUserEntries = userEntries;
+        renderAllEntriesForUser(userEntries);
+    })
+  }
 
 
+  // UPDATE - updates entry
+  function patchUpdatedEntryFetch(updatedEntryObj, clickedEntry) {
+
+    fetch(`${baseURL}/entries/${clickedEntry.id}`, {
+        method: "PATCH",
+        headers: defaultHeaders,
+        body: JSON.stringify(updatedEntryObj)
+    })
+    .then(r => r.json())
+    .then(updatedEntry => {
+        allUserEntries[allUserEntries.findIndex(el => el.id === updatedEntry.id)] = updatedEntry;
+        renderAllEntriesForUser(allUserEntries);
+        
+        modalContainer.innerHTML = `
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">${updatedEntry.title}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+            <img src=${updatedEntry.image}>
+            <h5>Mood: <strong>${updatedEntry.current_mood}</strong></h5>
+            <p>${updatedEntry.content}</p>
+            <a href="${updatedEntry.song}" target=_blank>Song of My Day</a>
+        </div>
+        <div class="modal-footer">
+            <div id="${updatedEntry.id}" style="display: none;"></div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="edit-entry-btn" class="btn btn-primary">Edit Entry</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Delete Entry</button>
+        </div>
+        `
+    })
+  }
 
     /***** MOOD FETCHES *****/
-
+  // READ - gets all moods
+  function getAllMoodsFetch() {
+      fetch(`${baseURL}/moods`)
+      .then(r => r.json())
+      .then(moods => {
+          allMoods = moods
+      })
+  }
 
 
     /***** QUOTE FETCHES *****/

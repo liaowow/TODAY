@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :create, :update, :destroy]
   resources :quotes, only: [:index]
 
+  get 'users/:id/entries', to: 'users#entries', as: 'user_entries'
 end

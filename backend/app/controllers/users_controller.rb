@@ -9,6 +9,12 @@ class UsersController < ApplicationController
         render json: user, except: [:created_at, :updated_at]
     end
 
+    def entries
+        user = User.find_by(id: params[:id])
+        user_entries = user.entries
+        render json: user_entries
+    end
+
     def create
         user = User.create(
             username: params[:username],
