@@ -18,6 +18,7 @@ function getLoggedInUserFetch(username) {
             localStorage.currentUser = "";
             alert("Try again!");
         } else {
+            getAllEntriesToUserArray()
             renderSidebar();
             renderEntryForm();
         };
@@ -71,129 +72,101 @@ function deleteUserAccountFetch() {
 };
 
     /***** ENTRY FETCHES *****/
-  // READ - gets all entries for logged-in user
-  function getAllEntriesForUser() {
+  // READ - gets all entries for logged-in user AND renders them
+function getAllEntriesForUser() {
+currentUser = JSON.parse(localStorage.currentUser);
+const currentUserID = currentUser.id;
+
+fetch(`${baseURL}/users/${currentUserID}/entries`)
+.then(r => r.json())
+.then(userEntries => {
+    allUserEntries = userEntries.reverse();
+    renderAllEntriesForUser(userEntries);
+})
+}
+
+// READ - gets all entries for logged-in user and adds them to global
+function getAllEntriesToUserArray() {
     currentUser = JSON.parse(localStorage.currentUser);
     const currentUserID = currentUser.id;
-
+    
     fetch(`${baseURL}/users/${currentUserID}/entries`)
     .then(r => r.json())
     .then(userEntries => {
-        allUserEntries = userEntries;
-        renderAllEntriesForUser(userEntries);
+        allUserEntries = userEntries.reverse();
     })
-  }
+    }
 
+// CREATE - creates a new entry for the logged in user
+function postNewEntryFetch(newEntryObj) {
+    fetch(`${baseURL}/entries`, {
+        method: "POST",
+        headers: defaultHeaders,
+        body: JSON.stringify(newEntryObj)
+    })
+    .then( r => r.json() )
+    .then( newEntry => {
+        getAllEntriesForUser();
+    })
+};
 
   // UPDATE - updates entry
-  function patchUpdatedEntryFetch(updatedEntryObj, clickedEntry) {
+function patchUpdatedEntryFetch(updatedEntryObj, clickedEntry) {
 
+fetch(`${baseURL}/entries/${clickedEntry.id}`, {
+    method: "PATCH",
+    headers: defaultHeaders,
+    body: JSON.stringify(updatedEntryObj)
+})
+.then(r => r.json())
+.then(updatedEntry => {
+    allUserEntries[allUserEntries.findIndex(el => el.id === updatedEntry.id)] = updatedEntry;
+    renderAllEntriesForUser(allUserEntries);
+    
+    modalContainer.innerHTML = `
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLongTitle">${updatedEntry.title}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <img class="card-img-top" src=${updatedEntry.image}>
+        <br><br>
+        <h5>Mood: <strong>${updatedEntry.current_mood}</strong></h5>
+        <p>${updatedEntry.content}</p>
+        <a href="${updatedEntry.song}" target=_blank>Song of My Day</a>
+    </div>
+    <div class="modal-footer">
+        <div id="${updatedEntry.id}" style="display: none;"></div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="edit-entry-btn" class="btn btn-primary">Edit Entry</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Delete Entry</button>
+    </div>
+    `
+})
+}
+
+// DELETE - deletes an entry when the delete button is clicked
+function deleteEntryFetch(clickedEntry) {
     fetch(`${baseURL}/entries/${clickedEntry.id}`, {
-        method: "PATCH",
-        headers: defaultHeaders,
-        body: JSON.stringify(updatedEntryObj)
+        method: "DELETE"
     })
-    .then(r => r.json())
-    .then(updatedEntry => {
-        allUserEntries[allUserEntries.findIndex(el => el.id === updatedEntry.id)] = updatedEntry;
-        renderAllEntriesForUser(allUserEntries);
-        
-        modalContainer.innerHTML = `
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">${updatedEntry.title}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            <img src=${updatedEntry.image}>
-            <h5>Mood: <strong>${updatedEntry.current_mood}</strong></h5>
-            <p>${updatedEntry.content}</p>
-            <a href="${updatedEntry.song}" target=_blank>Song of My Day</a>
-        </div>
-        <div class="modal-footer">
-            <div id="${updatedEntry.id}" style="display: none;"></div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="edit-entry-btn" class="btn btn-primary">Edit Entry</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Delete Entry</button>
-        </div>
-        `
+    .then( () => {
+        getAllEntriesForUser();
     })
-  }
+};
 
     /***** MOOD FETCHES *****/
   // READ - gets all moods
-  function getAllMoodsFetch() {
-      fetch(`${baseURL}/moods`)
-      .then(r => r.json())
-      .then(moods => {
-          allMoods = moods
-      })
-  }
+function getAllMoodsFetch() {
+    fetch(`${baseURL}/moods`)
+    .then(r => r.json())
+    .then(moods => {
+        allMoods = moods
+    })
+}
 
 
     /***** QUOTE FETCHES *****/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// /*** TESTING FETCH ***/
-// const postFetch = function() {
-//   fetch("http://localhost:3000/entries", {
-//       method: "POST",
-//       headers: {
-//           "Content-Type": "application/json",
-//           "Accept": "application/json"
-//       },
-//       body: JSON.stringify({
-//           title: "today I...",
-//           content: "ars;ghuareig",
-//           current_mood: "happy",
-//           mood_id: 1,
-//           image: "url",
-//           song: "url",
-//           quote_id: 20,
-//           user_id: 2
-//       })
-//   })
-// }
-
-// const patchFetch = function() {
-//   fetch("http://localhost:3000/entries/131", {
-//       method: "PATCH",
-//       headers: {
-//           "Content-Type": "application/json",
-//           "Accept": "application/json"
-//       },
-//       body: JSON.stringify({
-//           title: "yesterday I...",
-//           content: "oops I did that again...",
-//           current_mood: "sad",
-//           mood_id: 2,
-//           image: "urlurl",
-//           song: "urlurl",
-//           quote_id: 19
-//       })
-//   })
-// }
-
-// const deleteFetch = function() {
-//   fetch("http://localhost:3000/entries/131", {
-//       method: "DELETE",
-//   })
-// }
