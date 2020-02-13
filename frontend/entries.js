@@ -198,6 +198,7 @@ function renderEntryForm() {
             </button>
             <br><br>
         <label for="currentMood"><em>(...then select a mood from the dropdown menu that best describes your feelings today:)</em></label>
+        <br>
         <select name="currentMood" id="select-mood" class="select-css">
             <option>Pick a word or emoji</option>
             <option>Happy</option>

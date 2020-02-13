@@ -323,7 +323,7 @@ let update = function() {
     document.querySelector(".sidebar-heading").innerHTML = 
     `
     <h1 style="color:#0C60FF;"><strong>TODAY</strong></h1>
-    ${moment().format('MMMM Do YYYY, h:mm:ss a')}
+    <h5 style="color:#165CE5;">${moment().format('MMMM Do YYYY, h:mm:ss a')}</h5>
     `;
 };
 
