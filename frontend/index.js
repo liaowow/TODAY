@@ -212,7 +212,7 @@ function renderEditAccountForm() {
         <input type="text" name="location" value="${currentUser.location}"><br>
         <label for="profilePic">Profile Picture (url):</label><br>
         <input type="text" name="profilePic" value="${currentUser.profile_pic}"><br><br>
-        <input type="submit" value="Edit Account">
+        <input type="submit" class="btn btn-primary" value="Edit Account">
     </form>
     `
 
