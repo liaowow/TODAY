@@ -18,7 +18,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #007bff;
+  --primary: #28A5CE;
   --secondary: #6c757d;
   --success: #28a745;
   --info: #17a2b8;
@@ -2423,14 +2423,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: #397FF3;
+  border-color: #397FF3;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: #273877;
+  border-color: #273877;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -2593,8 +2593,8 @@ fieldset:disabled a.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #d73e37;
+  border-color: #d73e37;
 }
 
 .btn-danger:hover {
@@ -10093,3 +10093,90 @@ a.text-dark:hover, a.text-dark:focus {
 .emoji-display {
   max-width: 200px;
 }
+
+
+/* sidebar footer */
+.sidebar-footer {
+  position: relative;
+  left: 20px;
+  bottom: 0;
+  top: 250px;
+
+}
+
+/* moods page animation */
+@-webkit-keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+@-moz-keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+@keyframes AnimationName {
+  0%{background-position:50% 0%}
+  50%{background-position:51% 100%}
+  100%{background-position:50% 0%}
+}
+
+.color-animation-happy {
+  background: linear-gradient(#00DCF3, #c3e6cb, #ffe8a1);
+  background-size: 100% 1300%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border-radius: 5px;
+}
+
+.color-animation-sad {
+  background: linear-gradient(#bdbabe, #a5a5b9);
+  background-size: 100% 1300%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border-radius: 5px;
+}
+
+.color-animation-angry {
+  background: linear-gradient(rgb(240, 97, 31), #e9b723);
+  background-size: 100% 1300%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border-radius: 5px;
+}
+
+.color-animation-calm {
+  background: linear-gradient(#e7e3bf, #cbe9e2, #abf3ef);
+  background-size: 100% 1300%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border-radius: 5px;
+}
+
+/* logo animation */
+.logo-animation-happy {
+  background: linear-gradient(-60deg, #397FF3, rgb(44, 190, 226), #397FF3, #bdbabe);
+  background-size: 300%;
+  animation: flow 3s ease-in-out infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes flow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+
+/* weather icon */
+/* figure {
+	margin: 5em auto;
+	width: 64px;
+	height: 64px;
+} */
