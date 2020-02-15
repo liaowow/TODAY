@@ -104,22 +104,32 @@ function renderSidebar() {
     if (localStorage.currentUser === "") {
     sidebarDiv.innerHTML = `
     <div class="sidebar-heading">
-        Date (placeholder)
+        <h1 class="logo-animation-happy"><strong>TODAY</strong>  <canvas width="30" height="30"></canvas></h1>
+        <div id="clock-div"></div>
     </div>
     <div class="list-group list-group-flush">
             <p class="list-group-item list-group-item-action bg-light">Welcome to <strong>TODAY</strong>, an intimate daily journal app.<br><br>
             Here you can track your daily thoughts, moods, and so much more!</p>
-            
+            <p class="sidebar-footer">Made with ❤️in NYC<br>
+            by <a href="https://annieliao.com" target=_blank>Annie</a> & <a href="https://github.com/SeanWelshBrown" target=_blank>Sean</a> © 2020
+            </p>
     </div>` 
     } else {
         sidebarDiv.innerHTML = `
-        <div class="sidebar-heading">Date (placeholder)</div>
+        <div class="sidebar-heading">
+            <h1 class="logo-animation-happy"><strong>TODAY</strong>  <canvas width="30" height="30"></canvas></h1>
+            
+            <div id="clock-div"></div>
+        </div>
         <div class="list-group list-group-flush">
             <a href="#" class="list-group-item list-group-item-action bg-light" id="create-entry">Create Entry</a>
             <a href="#" class="list-group-item list-group-item-action bg-light" id="entries">Entries</a>
             <a href="#" class="list-group-item list-group-item-action bg-light" id="moods">Moods</a>
             <a href="#" class="list-group-item list-group-item-action bg-light" id="my-account">My Account</a>
             <a href="#" class="list-group-item list-group-item-action bg-light" id="log-out">Log Out</a>
+            <p class="sidebar-footer">Made with ❤️in NYC<br>
+            by <a href="https://annieliao.com" target=_blank>Annie</a> & <a href="https://github.com/SeanWelshBrown" target=_blank>Sean</a> © 2020
+            </p>
         </div>`
     };
 };
@@ -256,35 +266,42 @@ function renderMoodData() {
         <p>You only have one entry. Go create some more!</p>`
     } else {
         mainPageDiv.innerHTML = `
-        <h1>Hi ${currentUser.first_name}.</h1>
-        <br>
-        <h5>Based on your past ${entryCount} entries, your average mood is:</h5>
-        <div id="emoji-display"></div>
-        <h5>Entry Mood Counts:</h5>
-        <br>
-        <div id="mood-count-div" class="card-deck"></div>
+        <div id="color-gradient-div">
+            <h1>Hi ${currentUser.first_name}.</h1>
+            <br>
+            <h5>Based on your past ${entryCount} entries, your average mood is:</h5>
+            <div id="emoji-display"></div>
+            <h5>Entry Mood Counts:</h5>
+            <br>
+            <div id="mood-count-div" class="card-deck"></div>
+        </div>
         `
+        const colorGradientDiv = mainPageDiv.querySelector("#color-gradient-div")
         const emojiDisplayDiv = mainPageDiv.querySelector("#emoji-display");
         switch(maxIndex) {
             case 0:
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-happy.png">
                 <h6 style="color: grey">(Happy)</h6>
                 <br>`
+                colorGradientDiv.className = "color-animation-happy"
                 break;
             case 1:
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-sad.png">
                 <h6>(Sad)</h6>
                 <br>`
+                colorGradientDiv.className = "color-animation-sad"
                 break;
             case 2:
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-angry.png">
                 <h6>(Angry)</h6>
                 <br>`
+                colorGradientDiv.className = "color-animation-angry"
                 break;
             case 3:
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend/img/emoji-calm.png">
                 <h6 style="color: grey">(Calm)</h6>
                 <br>`
+                colorGradientDiv.className = "color-animation-calm"
                 break;
         };
         const moodCountDiv = mainPageDiv.querySelector("#mood-count-div");
@@ -320,10 +337,9 @@ function renderMoodData() {
 
 // render the time in the header of the sidebar
 let update = function() {
-    document.querySelector(".sidebar-heading").innerHTML = 
+    document.querySelector("#clock-div").innerHTML = 
     `
-    <h1 style="color:#0C60FF;"><strong>TODAY</strong></h1>
-    <h5 style="color:#165CE5;">${moment().format('MMMM Do YYYY, h:mm:ss a')}</h5>
+    <h5 style="color:#19438B;">${moment().format('MMMM Do YYYY, h:mm:ss a')}</h5>
     `;
 };
 
@@ -344,6 +360,10 @@ function checkLoggedInUser() {
 
 // renders sidebar
 renderSidebar();
+// renders weather icon
+getWeatherFetch();
+setInterval(getWeatherFetch, 300000);
+// checks if user is logged in and renders page
 checkLoggedInUser();
 // adds time to sidebar
 update();

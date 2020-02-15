@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :quotes, only: [:index]
 
   get 'users/:id/entries', to: 'users#entries', as: 'user_entries'
+
+  get '/weather', to: "weather#show"
 end

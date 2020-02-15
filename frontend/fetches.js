@@ -158,7 +158,7 @@ function deleteEntryFetch(clickedEntry) {
 };
 
     /***** MOOD FETCHES *****/
-  // READ - gets all moods
+// READ - gets all moods
 function getAllMoodsFetch() {
     fetch(`${baseURL}/moods`)
     .then(r => r.json())
@@ -168,5 +168,71 @@ function getAllMoodsFetch() {
 }
 
 
-    /***** QUOTE FETCHES *****/
+    /***** WEATHER FETCHES *****/
+  // READ - gets weather API and...
+  function getWeatherFetch() {
 
+    // ...gets user's current location
+    function success(position) {
+        const latitude  = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        let weatherFetch = `${baseURL}/weather/?latitude=${latitude}&longitude=${longitude}`
+
+        fetch(weatherFetch)
+        .then(r => r.json())
+        .then(weatherObj => {
+            console.log(weatherObj)
+            const canvas = document.querySelector("canvas")
+            canvas.id = weatherObj.icon;
+            let icons = new Skycons({"color": "#397FF3"});
+
+            switch(canvas.id) {
+
+                case "clear-day":
+                    icons.set("clear-day", Skycons.CLEAR_DAY);
+                    break;
+                case "clear-night":
+                    icons.set("clear-night", Skycons.CLEAR_NIGHT);
+                    break;
+                case "partly-cloudy-day":
+                    icons.set("partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
+                    break;
+                case "partly-cloudy-night":
+                    icons.set("partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
+                    break;    
+                case "cloudy":
+                    icons.set("cloudy", Skycons.CLOUDY);
+                    break;
+                case "rain":
+                    icons.set("rain", Skycons.RAIN);
+                    break;
+                case "sleet":
+                    icons.set("sleet", Skycons.SLEET);
+                    break;
+                case "snow":
+                    icons.set("snow", Skycons.SNOW);
+                    break;   
+                case "wind":
+                    icons.set("wind", Skycons.WIND);
+                    break;
+                case "fog":
+                    icons.set("fog", Skycons.FOG);
+                    break;   
+            }
+            icons.play();
+        })
+    }
+
+    function error() {
+        console.log("Cannot retrieve location");
+    }
+
+    if (!navigator.geolocation) {
+        console.log("Geolocation is not supported by your browser");
+    } else {
+        console.log("Locating…");
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+  }

@@ -26,5 +26,5 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Ignore .env file that contains API key
+# Ignore .env file
 .env

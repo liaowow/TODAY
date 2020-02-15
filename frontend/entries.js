@@ -176,7 +176,7 @@ function renderEntryForm() {
     currentUser = JSON.parse(localStorage.currentUser);
 
     mainPageDiv.innerHTML = `
-    <h1>Create a new Entry, ${currentUser.first_name ? currentUser.first_name : "friend"}:</h1><br>
+    <h1>Create a New Entry, ${currentUser.first_name ? currentUser.first_name : "friend"}:</h1><br>
     <form id="create-entry-form">
         <label for="title">Give your entry a title:</label><br>
         <input type="text" name="title"><br><br>
