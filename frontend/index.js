@@ -20,6 +20,7 @@ sidebarDiv.addEventListener("click", handleSidebarClick)
 function handleSidebarClick(event) {
     switch(event.target.id) {
         case "create-entry":
+            mainPageDiv.className = "center-form";
             renderEntryForm();
             break;
         case "entries":
@@ -27,9 +28,11 @@ function handleSidebarClick(event) {
             getAllEntriesForUser();
             break;
         case "moods":
+            mainPageDiv.className = "center-form";
             renderMoodData();
             break;
         case "my-account":
+            mainPageDiv.className = "center-form";
             renderAccountInfo();
             break;
         case "log-out":
@@ -189,21 +192,34 @@ function renderAccountInfo() {
     mainPageDiv.innerHTML = `
     <h1>Account Information</h1>
     <br>
-    <img class="profile-picture" src="${currentUser.profile_pic}">
+    <img class="profile-picture" src="${currentUser.profile_pic}" style="border-radius: 50%;">
     <br><br>
-    <h5><em>First Name:</em></h5>
-    <h4>${currentUser.first_name}</h4>
-    <br>
-    <h5><em>Username:</em></h5>
-    <h4>${currentUser.username}</h4>
-    <br>
-    <h5><em>Location:</em></h5>
-    <h4>${currentUser.location}</h4>
-    <br>
+
+    <div class="card-deck">
+        <div class="card bg-light mb-5" style="max-width: 200px;">
+        <div class="card-header"><strong>First Name</strong></div>
+        <div class="card-body">
+            <h3>${currentUser.first_name}</h3>
+        </div>
+        </div>
+
+        <div class="card bg-light mb-5" style="max-width: 200px;">
+        <div class="card-header"><strong>Username</strong></div>
+        <div class="card-body">
+            <h3>${currentUser.username}</h3>
+        </div>
+        </div>
+
+        <div class="card bg-light mb-5" style="max-width: 200px;">
+        <div class="card-header"><strong>Location</strong></div>
+        <div class="card-body">
+            <h3>${currentUser.location}</h3>
+        </div>
+        </div>
+    </div>
     <button type="button" class="btn btn-primary" id="edit-user-btn">Edit Account Info</button>
-    <br><br>
     <button type="button" class="btn btn-danger" id="delete-user-btn">Delete Account</button>
-    <br><br>
+    <br><br><br><br>
     `
 
     const editAccountButton = document.querySelector("#edit-user-btn");
@@ -229,7 +245,7 @@ function renderEditAccountForm() {
         <input type="text" name="location" value="${currentUser.location}"><br>
         <label for="profilePic">Profile Picture (url):</label><br>
         <input type="text" name="profilePic" value="${currentUser.profile_pic}"><br><br>
-        <input type="submit" class="btn btn-primary" value="Edit Account">
+        <input type="submit" class="btn btn-primary" value="Update Account">
     </form>
     `
 
@@ -288,21 +304,21 @@ function renderMoodData() {
         switch(maxIndex) {
             case 0:
                 mainPageWrapper.className = "color-animation-happy"
-                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-happy.png">
+                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend/img/emoji-happy.png">
                 <h6 style="color: grey">(Happy)</h6>
                 <br>`
                 // colorGradientDiv.className = "color-animation-happy"
                 break;
             case 1:
                 mainPageWrapper.className = "color-animation-sad"
-                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-sad.png">
+                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend/img/emoji-sad.png">
                 <h6>(Sad)</h6>
                 <br>`
                 // colorGradientDiv.className = "color-animation-sad"
                 break;
             case 2:
                 mainPageWrapper.className = "color-animation-angry"
-                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-angry.png">
+                emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend/img/emoji-angry.png">
                 <h6>(Angry)</h6>
                 <br>`
                 // colorGradientDiv.className = "color-animation-angry"
