@@ -158,7 +158,7 @@ function deleteEntryFetch(clickedEntry) {
 };
 
     /***** MOOD FETCHES *****/
-  // READ - gets all moods
+// READ - gets all moods
 function getAllMoodsFetch() {
     fetch(`${baseURL}/moods`)
     .then(r => r.json())
@@ -169,10 +169,10 @@ function getAllMoodsFetch() {
 
 
     /***** WEATHER FETCHES *****/
-  // READ - gets weather API and
+  // READ - gets weather API and...
   function getWeatherFetch() {
 
-    // READ - gets user's current location
+    // ...gets user's current location
     function success(position) {
         const latitude  = position.coords.latitude;
         const longitude = position.coords.longitude;
@@ -182,47 +182,46 @@ function getAllMoodsFetch() {
         fetch(weatherFetch)
         .then(r => r.json())
         .then(weatherObj => {
-        console.log(weatherObj)
-        const canvas = document.querySelector("canvas")
-        canvas.id = weatherObj.icon;
-        let icons = new Skycons({"color": "#397FF3"});
+            console.log(weatherObj)
+            const canvas = document.querySelector("canvas")
+            canvas.id = weatherObj.icon;
+            let icons = new Skycons({"color": "#397FF3"});
 
-        switch(canvas.id) {
+            switch(canvas.id) {
 
-            case "clear-day":
-                icons.set("clear-day", Skycons.CLEAR_DAY);
-                break;
-            case "clear-night":
-                icons.set("clear-night", Skycons.CLEAR_NIGHT);
-                break;
-            case "partly-cloudy-day":
-                icons.set("partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
-                break;
-            case "partly-cloudy-night":
-                icons.set("partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
-                break;    
-            case "cloudy":
-                icons.set("cloudy", Skycons.CLOUDY);
-                break;
-            case "rain":
-                icons.set("rain", Skycons.RAIN);
-                break;
-            case "sleet":
-                icons.set("sleet", Skycons.SLEET);
-                break;
-            case "snow":
-                icons.set("snow", Skycons.SNOW);
-                break;   
-            case "wind":
-                icons.set("wind", Skycons.WIND);
-                break;
-            case "fog":
-                icons.set("fog", Skycons.FOG);
-                break;   
-        }
-        icons.play();
+                case "clear-day":
+                    icons.set("clear-day", Skycons.CLEAR_DAY);
+                    break;
+                case "clear-night":
+                    icons.set("clear-night", Skycons.CLEAR_NIGHT);
+                    break;
+                case "partly-cloudy-day":
+                    icons.set("partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY);
+                    break;
+                case "partly-cloudy-night":
+                    icons.set("partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT);
+                    break;    
+                case "cloudy":
+                    icons.set("cloudy", Skycons.CLOUDY);
+                    break;
+                case "rain":
+                    icons.set("rain", Skycons.RAIN);
+                    break;
+                case "sleet":
+                    icons.set("sleet", Skycons.SLEET);
+                    break;
+                case "snow":
+                    icons.set("snow", Skycons.SNOW);
+                    break;   
+                case "wind":
+                    icons.set("wind", Skycons.WIND);
+                    break;
+                case "fog":
+                    icons.set("fog", Skycons.FOG);
+                    break;   
             }
-                )
+            icons.play();
+        })
     }
 
     function error() {
