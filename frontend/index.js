@@ -7,6 +7,7 @@ let allMoods;
 
 const sidebarDiv = document.querySelector("#sidebar-wrapper");
 const mainPageDiv = document.querySelector(".container-fluid");
+const mainPageWrapper = document.querySelector("#page-content-wrapper")
 
     /***** EVENT LISTENERS *****/
 
@@ -22,6 +23,7 @@ function handleSidebarClick(event) {
             renderEntryForm();
             break;
         case "entries":
+            mainPageWrapper.className = "";
             getAllEntriesForUser();
             break;
         case "moods":
@@ -136,15 +138,19 @@ function renderSidebar() {
 
 // renders the log-in page
 function renderLogIn() {
+    mainPageWrapper.className = "animate-background"
+    mainPageDiv.className = "center-form"
     mainPageDiv.innerHTML = `
-    <h3>Enter Username:</h3>
+    <h1 style="color:#19438B;">Welcome Back, Friend.</h1>
+    <br>
+    <h3 style="color:#19438B;">Enter Your Username:</h3>
     <form id="log-in-form">
         
-        <input type="text" id="log-in-username" name="username"><br><br>
+        <input type="text" id="log-in-username" class="rounded-box" name="username"><br><br>
         <input type="submit" class="btn btn-primary" value="Log In">
     </form>
     <br>
-    <h4>Don't have an account? <a href="javascript:;" onclick="renderCreateAccount();">Click here</a> to create one!</h4>
+    <h5 style="color:#19438B;">Don't have an account?<br> <a href="javascript:;" onclick="renderCreateAccount();">Click here</a> to create one!</h5>
     `
     const logInForm = document.querySelector("#log-in-form");
     logInForm.addEventListener("submit", handleLogInFormSubmit);
@@ -152,22 +158,23 @@ function renderLogIn() {
 
 // renders the create account page
 function renderCreateAccount() {
+    mainPageDiv.className = "center-form"
     mainPageDiv.innerHTML = `
-    <h1>Create Account</h1>
+    <h1 style="color:#19438B;">Create Account</h1>
     <br>
     <form id="create-account-form">
-        <label for="username">Username:</label><br>
-        <input type="text" name="username"><br>
-        <label for="firstName">First Name:</label><br>
-        <input type="text" name="firstName"><br>
-        <label for="location">Location (city):</label><br>
-        <input type="text" name="location"><br>
-        <label for="profilePic">Profile Picture (url):</label><br>
-        <input type="text" name="profilePic" placeholder="Optional..."><br><br>
-        <input type="submit" class="btn btn-primary" value="Create Account">
+        <label for="username" style="color:#19438B;"><b>Username:</b></label><br>
+        <input type="text" name="username" class="rounded-box"><br><br>
+        <label for="firstName" style="color:#19438B;"><b>First Name:</b></label><br>
+        <input type="text" name="firstName" class="rounded-box"><br><br>
+        <label for="location" style="color:#19438B;"><b>Location (city):</b></label><br>
+        <input type="text" name="location" class="rounded-box"><br><br>
+        <label for="profilePic" style="color:#19438B;"><b>Profile Picture (url):</b></label><br>
+        <input type="text" name="profilePic" class="rounded-box" placeholder="Optional..."><br><br>
+        <input type="submit" class="btn btn-primary" value="Create Account"><br>
     </form>
     <br>
-    <h4>Already have an account? <a href="javascript:;" onclick="renderLogIn();">Click here</a> to log in!</h4>
+    <h5>Already have an account?<br> <a href="javascript:;" onclick="renderLogIn();">Click here</a> to log in!</h5>
     `
     const createUserForm = document.querySelector("#create-account-form");
     createUserForm.addEventListener("submit", handleCreateUserformSubmit);
@@ -178,7 +185,7 @@ function renderCreateAccount() {
 // renders the currentUser's account information
 function renderAccountInfo() {
     currentUser = JSON.parse(localStorage.currentUser);
-
+    mainPageWrapper.className = ""
     mainPageDiv.innerHTML = `
     <h1>Account Information</h1>
     <br>
@@ -276,32 +283,36 @@ function renderMoodData() {
             <div id="mood-count-div" class="card-deck"></div>
         </div>
         `
-        const colorGradientDiv = mainPageDiv.querySelector("#color-gradient-div")
+        // const colorGradientDiv = mainPageDiv.querySelector("#color-gradient-div")
         const emojiDisplayDiv = mainPageDiv.querySelector("#emoji-display");
         switch(maxIndex) {
             case 0:
+                mainPageWrapper.className = "color-animation-happy"
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-happy.png">
                 <h6 style="color: grey">(Happy)</h6>
                 <br>`
-                colorGradientDiv.className = "color-animation-happy"
+                // colorGradientDiv.className = "color-animation-happy"
                 break;
             case 1:
+                mainPageWrapper.className = "color-animation-sad"
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-sad.png">
                 <h6>(Sad)</h6>
                 <br>`
-                colorGradientDiv.className = "color-animation-sad"
+                // colorGradientDiv.className = "color-animation-sad"
                 break;
             case 2:
+                mainPageWrapper.className = "color-animation-angry"
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend//img/emoji-angry.png">
                 <h6>(Angry)</h6>
                 <br>`
-                colorGradientDiv.className = "color-animation-angry"
+                // colorGradientDiv.className = "color-animation-angry"
                 break;
             case 3:
+                mainPageWrapper.className = "color-animation-calm"
                 emojiDisplayDiv.innerHTML = `<img class="emoji-display" src="../frontend/img/emoji-calm.png">
                 <h6 style="color: grey">(Calm)</h6>
                 <br>`
-                colorGradientDiv.className = "color-animation-calm"
+                // colorGradientDiv.className = "color-animation-calm"
                 break;
         };
         const moodCountDiv = mainPageDiv.querySelector("#mood-count-div");
@@ -362,7 +373,7 @@ function checkLoggedInUser() {
 renderSidebar();
 // renders weather icon
 getWeatherFetch();
-setInterval(getWeatherFetch, 300000);
+setInterval(getWeatherFetch, 300000 * 6);
 // checks if user is logged in and renders page
 checkLoggedInUser();
 // adds time to sidebar

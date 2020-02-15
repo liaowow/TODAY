@@ -10127,7 +10127,7 @@ a.text-dark:hover, a.text-dark:focus {
   -webkit-animation: AnimationName 3s ease infinite;
   -moz-animation: AnimationName 3s ease infinite;
   animation: AnimationName 3s ease infinite;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .color-animation-sad {
@@ -10136,7 +10136,7 @@ a.text-dark:hover, a.text-dark:focus {
   -webkit-animation: AnimationName 3s ease infinite;
   -moz-animation: AnimationName 3s ease infinite;
   animation: AnimationName 3s ease infinite;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .color-animation-angry {
@@ -10145,7 +10145,7 @@ a.text-dark:hover, a.text-dark:focus {
   -webkit-animation: AnimationName 3s ease infinite;
   -moz-animation: AnimationName 3s ease infinite;
   animation: AnimationName 3s ease infinite;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 .color-animation-calm {
@@ -10154,7 +10154,7 @@ a.text-dark:hover, a.text-dark:focus {
   -webkit-animation: AnimationName 3s ease infinite;
   -moz-animation: AnimationName 3s ease infinite;
   animation: AnimationName 3s ease infinite;
-  border-radius: 5px;
+  /* border-radius: 5px; */
 }
 
 /* logo animation */
@@ -10173,10 +10173,28 @@ a.text-dark:hover, a.text-dark:focus {
   100%{background-position:0% 50%}
 }
 
+/* rounded input text box */
+.rounded-box {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 3px solid #19438B;
+  padding: 20px; 
+  width: 250px;
+  height: 8px;    
+}
 
-/* weather icon */
-/* figure {
-	margin: 5em auto;
-	width: 64px;
-	height: 64px;
-} */
+/* center forms */
+.center-form {
+  text-align: center;
+  position: relative; 
+  top: 3%;
+}
+
+/* main container color animation */
+.animate-background {
+  background: linear-gradient(#f1f1e9, #cbe9e2, #abd6f3);
+  background-size: 100% 1300%;
+  -webkit-animation: AnimationName 4s ease infinite;
+  -moz-animation: AnimationName 4s ease infinite;
+  animation: AnimationName 4s ease-in-out infinite;
+}

@@ -175,6 +175,7 @@ function handleCreateEntry(event) {
 function renderEntryForm() {
     currentUser = JSON.parse(localStorage.currentUser);
 
+    mainPageWrapper.className = ""
     mainPageDiv.innerHTML = `
     <h1>Create a New Entry, ${currentUser.first_name ? currentUser.first_name : "friend"}:</h1><br>
     <form id="create-entry-form">
@@ -224,8 +225,9 @@ function renderEntryForm() {
 
 // render all user entries
 function renderAllEntriesForUser(allUserEntries) {
+    mainPageDiv2.className = "";
     mainPageDiv.innerHTML = `
-    <h1>Your Entries</h1>
+    <h1 style="text-align: center;">Your Entries</h1>
     <br>
     <div class="card-columns"></div>
     `
