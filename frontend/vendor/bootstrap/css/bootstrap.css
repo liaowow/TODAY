@@ -10186,8 +10186,7 @@ a.text-dark:hover, a.text-dark:focus {
 /* center forms */
 .center-form {
   text-align: center;
-  position: relative; 
-  top: 3%;
+  position: relative;
 }
 
 /* main container color animation */

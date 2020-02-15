@@ -225,7 +225,6 @@ function renderEntryForm() {
 
 // render all user entries
 function renderAllEntriesForUser(allUserEntries) {
-    mainPageDiv2.className = "";
     mainPageDiv.innerHTML = `
     <h1 style="text-align: center;">Your Entries</h1>
     <br>

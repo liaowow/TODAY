@@ -25,6 +25,7 @@ function handleSidebarClick(event) {
             break;
         case "entries":
             mainPageWrapper.className = "";
+            mainPageDiv.className = "center-form";
             getAllEntriesForUser();
             break;
         case "moods":
