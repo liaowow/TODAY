@@ -39,7 +39,15 @@ end
     assigned_mood_emojis = assigned_mood.emojis.split(",")
     combined_mood = assigned_mood_words + assigned_mood_emojis
 
-    Entry.create(title: Faker::Book.title, content: Faker::Lorem.paragraph(sentence_count: 10), current_mood: combined_mood.sample, image: Faker::Avatar.image, song: Faker::Avatar.image, user_id: u1.id, mood_id: assigned_mood.id, quote_id: rand(1..50))
+    unsplash_imgs = []
+    img_keywords = [
+        "nature", "relax", "water", "vacation", "sad", "happy", "mad", "beautiful", "cool", "peaceful",
+        "city", "landscape", "mountain", "work", "smile", "music", "fun", "serene", "loud", "sunny",
+        "balloon", "object", "photography", "painting", "book", "cute", "animal", "horse", "bird", "tree"
+    ]
+    img_keywords.each{ |word| unsplash_imgs.push("https://source.unsplash.com/800x600/?#{word}")}
+
+    Entry.create(title: Faker::Book.title, content: Faker::Lorem.paragraph(sentence_count: 10), current_mood: combined_mood.sample, image: unsplash_imgs.sample, song: Faker::Avatar.image, user_id: u1.id, mood_id: assigned_mood.id, quote_id: rand(1..50))
 end
 
 100.times do
@@ -48,5 +56,13 @@ end
     assigned_mood_emojis = assigned_mood.emojis.split(",")
     combined_mood = assigned_mood_words + assigned_mood_emojis
 
-    Entry.create(title: Faker::Book.title, content: Faker::Lorem.paragraph(sentence_count: 10), current_mood: combined_mood.sample, image: Faker::Avatar.image, song: Faker::Avatar.image, user_id: rand(2..5), mood_id: assigned_mood.id, quote_id: rand(1..50))
+    unsplash_imgs = []
+    img_keywords = [
+        "nature", "relax", "water", "vacation", "sad", "happy", "mad", "beautiful", "cool", "peaceful",
+        "city", "landscape", "mountain", "work", "smile", "music", "fun", "serene", "loud", "sunny",
+        "balloon", "object", "photography", "painting", "book", "cute", "animal", "horse", "bird", "tree"
+    ]
+    img_keywords.each{ |word| unsplash_imgs.push("https://source.unsplash.com/800x600/?#{word}")}
+
+    Entry.create(title: Faker::Book.title, content: Faker::Lorem.paragraph(sentence_count: 10), current_mood: combined_mood.sample, image: unsplash_imgs.sample, song: Faker::Avatar.image, user_id: rand(2..5), mood_id: assigned_mood.id, quote_id: rand(1..50))
 end
