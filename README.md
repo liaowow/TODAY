@@ -1,4 +1,4 @@
-# today
+# TODAY
 
 ## Introduction
 Welcome to TODAY, an intimate daily journal app. TODAY is a single-page application written in vanilla JavaScript without the aid of frameworks.
