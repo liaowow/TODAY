@@ -1,7 +1,9 @@
 # TODAY
 
 ## Introduction
-Welcome to TODAY, an intimate daily journal app. TODAY is a single-page application written in vanilla JavaScript without the aid of frameworks.
+Welcome to TODAY, an intimate daily journal app. TODAY is a single-page application written in plain JavaScript without the aid of frameworks.
+
+Deployed URL: https://liaowow.github.io/today-frontend/
 
 ## Features
 TODAY features CRUD (Create, Read, Update, Delete) functionality for both a user and their journal entries.
